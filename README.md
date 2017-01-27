@@ -4,4 +4,4 @@ Peli, jossa pelaajat asettavat vuorotellen merkkinsä tyhjään ruutuun tavoitte
 
 ##Dokumentaatio
 [aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)  
-[aiheen kuvaus](dokumentaatio/tuntikirjanpito.md)
+[tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
