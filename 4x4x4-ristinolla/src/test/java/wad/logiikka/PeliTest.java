@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 public class PeliTest {
 
     private Peli peli;
-    private Random random;
 
     public PeliTest() {
     }
@@ -36,7 +35,6 @@ public class PeliTest {
     @Before
     public void setUp() {
         this.peli = new Peli();
-        this.random = new Random();
     }
 
     @After
@@ -44,22 +42,61 @@ public class PeliTest {
     }
 
     @Test
-    public void alustaRuudutAlustaaSatunnaisenRuudunOikein() {
-        this.peli.alustaRuudut();
+    public void ruudutTyhjiaPelinAlussa() {
 
-        int randomX = random.nextInt(4) + 1;
-        int randomY = random.nextInt(4) + 1;
-        int randomZ = random.nextInt(4) + 1;
+        for (int x = 1; x <= 4; x++) {
+            for (int y = 1; y <= 4; y++) {
+                for (int z = 1; z <= 4; z++) {
 
-        System.out.println("(" + randomX + ", " + randomY + ", " + randomZ + ") randomeina");
+                    assertEquals(null, peli.getRuudut()[x][y][z]);
 
-        Ruutu randomRuutu = this.peli.getRuudut()[randomX][randomY][randomZ];
+                }
+            }
+        }
+        String oletuspelitilanne = "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
 
-        assertEquals(randomX, randomRuutu.getX());
-        assertEquals(randomY, randomRuutu.getY());
-        assertEquals(randomZ, randomRuutu.getZ());
-
-        assertEquals(Ruudussa.TYHJA, randomRuutu.getSisalto());
+        assertEquals(oletuspelitilanne, peli.toString());
     }
 
+    @Test
+    public void tayttaaTyhjanRuudunOikeinMetodillaTaytaRuutu() {
+        peli.taytaRuutu(3, 1, 3, Pelimerkki.RISTI);
+
+        String oletuspelitilanne = "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "--x- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+
+        assertEquals(oletuspelitilanne, peli.toString());
+        assertEquals(Pelimerkki.RISTI, peli.getRuudut()[3][1][3]);
+    }
+
+    @Test
+    public void eiTaytaJoTaytettyaRuutuaMetodillaTaytaRuutu() {
+        peli.taytaRuutu(3, 1, 3, Pelimerkki.RISTI);
+        peli.taytaRuutu(3, 1, 3, Pelimerkki.NOLLA);
+
+        String oletuspelitilanne = "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "--x- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+
+        assertEquals(oletuspelitilanne, peli.toString());
+    }
+
+    @Test
+    public void yritysTayttaaOlematonRuutuMetodillaTaytaRuutuEiMuutaPeliTilannetta() {
+        peli.taytaRuutu(0, 0, 7, Pelimerkki.RISTI);
+
+        String oletuspelitilanne = "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+        oletuspelitilanne += "---- ---- ---- ---- \n";
+
+        assertEquals(oletuspelitilanne, peli.toString());
+    }
+    
 }
