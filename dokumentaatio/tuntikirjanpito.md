@@ -5,3 +5,4 @@ Päivä | Tunnit | Kuvaus
 26.01.2017 | 2h | Ohjelmoinnin aloittaminen ohjelmalogiikasta ja sen testeistä.
 26.01.2017 | 2h | Ohjelmalogiikan ja sen testien työstämisen jatkaminen.
 27.01.2017 | 2h | Ohjelmalogiikan ja sen testien työstämisen jatkaminen ja sekä pit-konfigurointi ja raportin luonti.
+01.02.2017 | 4h | Refaktoroin luokasta Peli käyttöliittymä toiminnallisuutta KomentoKayttoliittymä-luokkaan. Lisäsin myös toiminnallisuuden pelin viottamiseen akseleiden suuntaisille riveille.
