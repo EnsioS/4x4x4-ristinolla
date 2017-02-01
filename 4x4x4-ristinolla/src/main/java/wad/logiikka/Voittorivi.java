@@ -16,6 +16,8 @@ public class Voittorivi {
     public Voittorivi(Vektori aloituspaikka, Vektori suuntavektori) {
         this.aloituspaikka = aloituspaikka;
         this.suuntavektori = suuntavektori;
+        this.risteja = 0;
+        this.nollia = 0;
     }
 
     public Vektori getAloituspaikka() {

@@ -1,6 +1,8 @@
 package wad;
 
+import wad.kayttoliittyma.KomentoKayttoliittyma;
 import wad.logiikka.Peli;
+import wad.logiikka.Pelimerkki;
 
 /**
  *
@@ -9,11 +11,9 @@ import wad.logiikka.Peli;
 public class Main {
 
     public static void main(String[] args) {
-        Peli peli = new Peli();
-        
-        peli.pelaaUusi();
-        
-        System.out.println(peli);               
+
+        KomentoKayttoliittyma kayttoliittyma = new KomentoKayttoliittyma();
+        kayttoliittyma.kaynnista();
     }
     
 }

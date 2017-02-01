@@ -36,69 +36,35 @@ public class Peli {
         this.ruudut = ruudut;
     }
 
-    public void pelaaUusi() {
-        String syote = "";
-        Pelimerkki pelaaja = Pelimerkki.RISTI;
+    public void alustaVoittorivit() {
+        int laskuri = 0;
 
-        while (!syote.equals("lopeta")) {
-            System.out.println("\n Pelitilanne \n");
-            System.out.println(this.toString());
-            System.out.println("Nyt on pelaajan " + pelaaja + " vuoro.");
-            System.out.println("Syote lopeta lopettaa pelin.");
-            int xKordinaatti = lueKoordinaatti("Anna x-koordinaatti: ");
-            if (xKordinaatti < 0) {
-                syote = "lopeta";
-                continue;
-            }
-            
-            int yKordinaatti = lueKoordinaatti("Anna y-koordinaatti: ");
-            if (yKordinaatti < 0) {
-                syote = "lopeta";
-                continue;
-            }
-            int zKordinaatti = lueKoordinaatti("Anna z-koordinaatti: ");
-            if (zKordinaatti < 0) {
-                syote = "lopeta";
-                continue;
-            } 
-            boolean vaihdetaanko = this.taytaRuutu(xKordinaatti, yKordinaatti, zKordinaatti, pelaaja);
-            if (vaihdetaanko) {
-                pelaaja = this.vaihdaVuoro(pelaaja);
-            }
-        }
-    }
+        Vektori suuntaX = new Vektori(1, 0, 0);
+        Vektori suuntaY = new Vektori(0, 1, 0);
+        Vektori suuntaZ = new Vektori(0, 0, 1);
 
-    private Pelimerkki vaihdaVuoro(Pelimerkki edellinen) {
-        if (edellinen == Pelimerkki.NOLLA) {
-            return Pelimerkki.RISTI;
-        }
-        return Pelimerkki.NOLLA;
-    }
-    
-    private int lueKoordinaatti(String pyynto) {
-        int koordinaatti = -1;
-        boolean eiLoytynyt = true;
-
-        while (eiLoytynyt) {
-            System.out.print(pyynto);
-            String syote = lukija.nextLine();
-
-            try {
-                koordinaatti = Integer.parseInt(syote);
-                if (koordinaatti < 1 || koordinaatti > 4) {
-                    System.out.println("Koordinaatin täytyy olla 1, 2, 3 tai 4.");
-                } else {
-                    eiLoytynyt = false;
-                }
-            } catch (Exception e) {
-                if (syote.equals("lopeta")) {
-                    return -1;
-                }
-                System.out.println("Et syöttänyt lukua");
+        //lisätään x-suuntaiset voittorivit
+        for (int y = 1; y <= 4; y++) {
+            for (int z = 1; z <= 4; z++) {
+                this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, y, z), suuntaX);
+                laskuri++;
             }
         }
 
-        return koordinaatti;
+        for (int x = 1; x <= 4; x++) {
+            //lisätään y-suuntaiset voittorivit
+            for (int z = 1; z <= 4; z++) {
+                this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, z), suuntaY);
+                laskuri++;
+            }
+
+            //lisätään z-suuntaiset voittorivit
+            for (int y = 1; y <= 4; y++) {
+                this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, y, 1), suuntaZ);
+                laskuri++;
+            }
+
+        }
     }
 
     public Voittorivi[] getVoittorivit() {
@@ -121,7 +87,36 @@ public class Peli {
         }
 
         ruudut[x][y][z] = merkki;
+        kirjaaMerkkiVoittoriveihin(x, y, z, merkki);
         return true;
+    }
+
+    public void kirjaaMerkkiVoittoriveihin(int x, int y, int z, Pelimerkki merkki) {
+        for (Voittorivi rivi : this.voittorivit) {
+            if (rivi.sisaltaa(new Vektori(x, y, z))) {
+                if (merkki == Pelimerkki.NOLLA) {
+                    rivi.setNollia(rivi.getNollia() + 1);
+                } else {
+                    rivi.setRisteja(rivi.getRisteja() + 1);
+                }
+            }
+        }
+    }
+
+    public Pelimerkki pelinVoittaja() {
+
+        for (Voittorivi rivi : this.voittorivit) {
+
+            if (rivi.getNollia() == 4) {
+                return Pelimerkki.NOLLA;
+            }
+
+            if (rivi.getRisteja() == 4) {
+                return Pelimerkki.RISTI;
+            }
+        }
+
+        return null;
     }
 
     @Override

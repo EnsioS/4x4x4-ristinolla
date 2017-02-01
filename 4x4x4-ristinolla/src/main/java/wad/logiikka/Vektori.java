@@ -45,7 +45,7 @@ public class Vektori {
     }
 
     public Vektori kerro(int a) {
-        return new Vektori(a*x, a*y, a*z);
+        return new Vektori(a * x, a * y, a * z);
     }
     
     @Override

@@ -35,6 +35,7 @@ public class PeliTest {
     @Before
     public void setUp() {
         this.peli = new Peli();
+        peli.alustaVoittorivit();
     }
 
     @After
@@ -99,4 +100,15 @@ public class PeliTest {
         assertEquals(oletuspelitilanne, peli.toString());
     }
     
+    @Test
+    public void pelinVoittajaPalauttaaVoittajanJosVoittoriviTaysi() {
+        
+        assertFalse("Tässä tilanteessa metodin pelinVoittaja pitäisi palauttaa null", peli.pelinVoittaja() != null);
+        
+        for (int x = 1; x <= 4; x++) {
+            peli.taytaRuutu(x, 1, 1, Pelimerkki.RISTI);
+        }
+                
+        assertEquals("RISTI", peli.pelinVoittaja().toString());
+    }
 }
