@@ -24,16 +24,8 @@ public class Voittorivi {
         return aloituspaikka;
     }
 
-    public void setAloituspaikka(Vektori aloituspaikka) {
-        this.aloituspaikka = aloituspaikka;
-    }
-
     public Vektori getSuuntavektori() {
         return suuntavektori;
-    }
-
-    public void setSuuntavektori(Vektori suuntavektori) {
-        this.suuntavektori = suuntavektori;
     }
 
     public int getRisteja() {

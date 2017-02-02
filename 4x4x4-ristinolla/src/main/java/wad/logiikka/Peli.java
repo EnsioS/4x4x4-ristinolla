@@ -1,7 +1,5 @@
 package wad.logiikka;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Ensio
@@ -10,22 +8,12 @@ public class Peli {
 
     private Pelimerkki[][][] ruudut;
     private Voittorivi[] voittorivit;
-    private Scanner lukija;
 
     public Peli() {
         // luodaan oikean kokoinen taulukko peliruuduille
         this.ruudut = new Pelimerkki[5][5][5];
         // luodaan oikean kokoinen taulukko voittoriveille, tässä vaiheessa vain pysty-ja vaakasuorille
         this.voittorivit = new Voittorivi[48];
-        this.lukija = new Scanner(System.in);
-    }
-
-    public Peli(Scanner lukija) {
-        // luodaan oikean kokoinen taulukko peliruuduille
-        this.ruudut = new Pelimerkki[5][5][5];
-        // luodaan oikean kokoinen taulukko voittoriveille, tässä vaiheessa vain pysty-ja vaakasuorille
-        this.voittorivit = new Voittorivi[48];
-        this.lukija = lukija;
     }
 
     public Pelimerkki[][][] getRuudut() {

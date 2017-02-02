@@ -18,33 +18,23 @@ import static org.junit.Assert.*;
  */
 public class VektoriTest {
 
-    public VektoriTest() {
+    @Test
+    public void konstruktorialustaaOliomuttujatOikein() {
+        Vektori a = new Vektori(1, 1, 2);
+        
+        assertEquals(1, a.getX());
+        assertEquals(1, a.getY());
+        assertEquals(2, a.getZ());
     }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
+    
     @Test
     public void lisaysToimiiOikein() {
         Vektori a = new Vektori(1, 2, 3);
-        Vektori b = new Vektori(-1, 0, 2);
+        Vektori b = new Vektori(-1, 1, 2);
         
         Vektori summa = a.lisaa(b);
         
-        assertEquals("(0, 2, 5)", summa.toString());
+        assertEquals("(0, 3, 5)", summa.toString());
     }
     
     @Test
