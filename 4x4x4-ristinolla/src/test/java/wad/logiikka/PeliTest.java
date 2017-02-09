@@ -110,5 +110,16 @@ public class PeliTest {
         }
                 
         assertEquals("RISTI", peli.pelinVoittaja().toString());
+        
+        Peli uusi = new Peli();
+        uusi.alustaVoittorivit();
+        
+        assertFalse("Tässä tilanteessa metodin pelinVoittaja pitäisi palauttaa null", uusi.pelinVoittaja() != null);
+        
+        for (int x = 1; x <= 4; x++) {
+            uusi.taytaRuutu(x, 1, 1, Pelimerkki.NOLLA);
+        }
+                
+        assertEquals("NOLLA", uusi.pelinVoittaja().toString());
     }
 }

@@ -83,6 +83,7 @@ public class KomentoKayttoliittyma {
 
             if (peli.pelinVoittaja() != null) {
                 System.out.println("\n" + peli.pelinVoittaja().toString() + " voitti pelin.\n");
+                System.out.println(peli);
                 break;
             }
         }

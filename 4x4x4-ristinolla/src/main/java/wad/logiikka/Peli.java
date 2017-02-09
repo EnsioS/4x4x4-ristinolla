@@ -13,20 +13,24 @@ public class Peli {
         // luodaan oikean kokoinen taulukko peliruuduille
         this.ruudut = new Pelimerkki[5][5][5];
         // luodaan oikean kokoinen taulukko voittoriveille, tässä vaiheessa vain pysty-ja vaakasuorille
-        this.voittorivit = new Voittorivi[48];
+        this.voittorivit = new Voittorivi[76];
     }
 
     public Pelimerkki[][][] getRuudut() {
         return ruudut;
     }
 
-    public void setRuudut(Pelimerkki[][][] ruudut) {
-        this.ruudut = ruudut;
-    }
-
     public void alustaVoittorivit() {
         int laskuri = 0;
 
+        laskuri = alustaAkselienSuuntaiset(laskuri);
+        
+        laskuri = alustaTasolavistajienSuuntaiset(laskuri);
+        
+        alustaAvaruuslavistajienSuuntaiset(laskuri);
+    }
+
+    private int alustaAkselienSuuntaiset(int laskuri) {
         Vektori suuntaX = new Vektori(1, 0, 0);
         Vektori suuntaY = new Vektori(0, 1, 0);
         Vektori suuntaZ = new Vektori(0, 0, 1);
@@ -53,14 +57,57 @@ public class Peli {
             }
 
         }
+        return laskuri;
+    }
+
+    private int alustaTasolavistajienSuuntaiset(int laskuri) {
+        Vektori suuntaXY = new Vektori(1, 1, 0);
+        Vektori suuntaMiinusXY = new Vektori(-1, 1, 0);
+
+        Vektori suuntaZY = new Vektori(0, 1, 1);
+        Vektori suuntaMiinusZY = new Vektori(0, 1, -1);
+
+        Vektori suuntaXZ = new Vektori(1, 0, 1);
+        Vektori suuntaMiinusXZ = new Vektori(-1, 0, 1);
+
+        for (int x = 1; x <= 4; x++) {
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 1), suuntaZY);
+            laskuri++;
+
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 4), suuntaMiinusZY);
+            laskuri++;
+        }
+
+        for (int z = 1; z <= 4; z++) {
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, z), suuntaXY);
+            laskuri++;
+
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, z), suuntaMiinusXY);
+            laskuri++;
+        }
+
+        for (int y = 1; y <= 4; y++) {
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, y, 1), suuntaXZ);
+            laskuri++;
+
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, y, 1), suuntaMiinusXZ);
+            laskuri++;
+        }
+        return laskuri++;
+    }
+
+    private void alustaAvaruuslavistajienSuuntaiset(int laskuri) {
+        this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, 1), new Vektori(1, 1, 1));
+        laskuri++;
+        this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, 1), new Vektori(-1, 1, 1));
+        laskuri++;
+        this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, 4), new Vektori(1, 1, -1));
+        laskuri++;
+        this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, 4), new Vektori(-1, 1, -1));
     }
 
     public Voittorivi[] getVoittorivit() {
         return voittorivit;
-    }
-
-    public void setVoittorivit(Voittorivi[] voittorivit) {
-        this.voittorivit = voittorivit;
     }
 
     public boolean taytaRuutu(int x, int y, int z, Pelimerkki merkki) {

@@ -1,5 +1,7 @@
 package wad;
 
+import javax.swing.SwingUtilities;
+import wad.kayttoliittyma.GraafinenKayttoliittyma;
 import wad.kayttoliittyma.KomentoKayttoliittyma;
 import wad.logiikka.Peli;
 import wad.logiikka.Pelimerkki;
@@ -14,6 +16,10 @@ public class Main {
 
         KomentoKayttoliittyma kayttoliittyma = new KomentoKayttoliittyma();
         kayttoliittyma.kaynnista();
+
+//        GraafinenKayttoliittyma kayttoliittyma = new GraafinenKayttoliittyma();
+//        
+//        SwingUtilities.invokeLater(kayttoliittyma);
     }
-    
+
 }
