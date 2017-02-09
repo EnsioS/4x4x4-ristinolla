@@ -1,6 +1,7 @@
 package wad.logiikka;
 
 /**
+ * Luokka luo pelin ja pitää yllä sen pelitilannetta.
  *
  * @author Ensio
  */
@@ -20,13 +21,16 @@ public class Peli {
         return ruudut;
     }
 
+    /**
+     * Metodi alustaa kaikki mahdolliset pelin voittorivit.
+     */
     public void alustaVoittorivit() {
         int laskuri = 0;
 
         laskuri = alustaAkselienSuuntaiset(laskuri);
-        
+
         laskuri = alustaTasolavistajienSuuntaiset(laskuri);
-        
+
         alustaAvaruuslavistajienSuuntaiset(laskuri);
     }
 
@@ -55,7 +59,6 @@ public class Peli {
                 this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, y, 1), suuntaZ);
                 laskuri++;
             }
-
         }
         return laskuri;
     }
@@ -73,7 +76,6 @@ public class Peli {
         for (int x = 1; x <= 4; x++) {
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 1), suuntaZY);
             laskuri++;
-
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 4), suuntaMiinusZY);
             laskuri++;
         }
@@ -81,7 +83,6 @@ public class Peli {
         for (int z = 1; z <= 4; z++) {
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, z), suuntaXY);
             laskuri++;
-
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, z), suuntaMiinusXY);
             laskuri++;
         }
@@ -89,7 +90,6 @@ public class Peli {
         for (int y = 1; y <= 4; y++) {
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, y, 1), suuntaXZ);
             laskuri++;
-
             this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, y, 1), suuntaMiinusXZ);
             laskuri++;
         }
@@ -110,6 +110,16 @@ public class Peli {
         return voittorivit;
     }
 
+    /**
+     * Metodi yrittää täyttää parametreissa pyydettävän ruudun.
+     *
+     * @param x täytettävän ruudun x-koordinaatti
+     * @param y täytettävän ruudun y-koordinaatti
+     * @param z täytettävän ruudun z-koordinaatti
+     * @param merkki ruudun täyttävän pelaajan merkki
+     *
+     * @return onnistuiko ruudun täyttäminen
+     */
     public boolean taytaRuutu(int x, int y, int z, Pelimerkki merkki) {
         if (x < 0 || x > 4 || y < 0 || y > 4 || z < 0 || z > 4) {
             System.out.println("Yritettiin täyttää ruutu, jota ei ole");
@@ -126,6 +136,14 @@ public class Peli {
         return true;
     }
 
+    /**
+     * Metodi kirjaa tiedon täytetystä ruudusta voittoriveihin.
+     *
+     * @param x kirjattavan ruudun x-koordinaatti
+     * @param y kirjattavan ruudun y-koordinaatti
+     * @param z kirjattavan ruudun z-koordinaatti
+     * @param merkki ilmaisee ruudun täyttävän pelaajan
+     */
     public void kirjaaMerkkiVoittoriveihin(int x, int y, int z, Pelimerkki merkki) {
         for (Voittorivi rivi : this.voittorivit) {
             if (rivi.sisaltaa(new Vektori(x, y, z))) {
@@ -138,19 +156,21 @@ public class Peli {
         }
     }
 
+    /**
+     * Metodi kertoo onko pelillä voittaja ja jos on niin kuka.
+     *
+     * @return palauttaa pelin voittajan, jos pelillä on voittaja
+     */
     public Pelimerkki pelinVoittaja() {
-
         for (Voittorivi rivi : this.voittorivit) {
 
             if (rivi.getNollia() == 4) {
                 return Pelimerkki.NOLLA;
             }
-
             if (rivi.getRisteja() == 4) {
                 return Pelimerkki.RISTI;
             }
         }
-
         return null;
     }
 
@@ -168,14 +188,11 @@ public class Peli {
                     } else if (ruudut[x][y][z] == Pelimerkki.RISTI) {
                         tulos.append("x");
                     }
-
                 }
                 tulos.append(" ");
             }
             tulos.append("\n");
         }
-
         return tulos.toString();
     }
-
 }

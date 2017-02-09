@@ -1,6 +1,8 @@
 package wad.logiikka;
 
 /**
+ * Luokka tarjoaa kolmiulotteisen vektorin summa-, skalaaritulo- ja
+ * vertailutoiminnallisuudet.
  *
  * @author Ensio
  */
@@ -28,14 +30,30 @@ public class Vektori {
         return z;
     }
 
+    /**
+     * Metodi laskee tämän vektorin ja parametrina annettavan vektorin
+     * suummavektorin.
+     *
+     * @param lisattava lisättävä vektori
+     *
+     * @return summavektori
+     */
     public Vektori lisaa(Vektori lisattava) {
         return new Vektori(x + lisattava.getX(), y + lisattava.getY(), z + lisattava.getZ());
     }
 
+    /**
+     * Metodi laskee tämän vektorin ja parametrina annettavan kokonaisluvun
+     * skalaaritulon.
+     *
+     * @param a kokonaisluku
+     *
+     * @return skalaaritulo
+     */
     public Vektori kerro(int a) {
         return new Vektori(a * x, a * y, a * z);
     }
-    
+
     @Override
     public boolean equals(Object object) {
         if (object == null) {
@@ -57,8 +75,6 @@ public class Vektori {
         return true;
     }
 
-    
-    
     @Override
     public String toString() {
         return "(" + x + ", " + y + ", " + z + ")";
