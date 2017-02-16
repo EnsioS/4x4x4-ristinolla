@@ -8,3 +8,5 @@ Päivä | Tunnit | Kuvaus
 01.02.2017 | 4h | Refaktoroin luokasta Peli käyttöliittymä toiminnallisuutta KomentoKayttoliittymä-luokkaan. Lisäsin myös toiminnallisuuden pelin viottamiseen akseleiden suuntaisille riveille.
 08.02.2017 | 2h | Aloitin graafisen käyttöliittymän työstämisen.
 09.02.2017 | 3h | Lisäsin loppujen voittorivien alustamisen ja aloitin javadocin.
+15.02.2017 | 3h | Jatkoin graafisen käyttöliittymän työstämistä.
+16.02.2017 | 4h | Jatkoin graafisen käyttöliittymän työstämistä ja konfiguroin checkstylen myös javadoceille.
