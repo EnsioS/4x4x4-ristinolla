@@ -9,16 +9,30 @@ public class Peli {
 
     private Pelimerkki[][][] ruudut;
     private Voittorivi[] voittorivit;
+    private Pelimerkki vuoro;
 
+    /**
+     * Konstruktori oliomuuttujien alustamiseen.
+     */
     public Peli() {
-        // luodaan oikean kokoinen taulukko peliruuduille
         this.ruudut = new Pelimerkki[5][5][5];
-        // luodaan oikean kokoinen taulukko voittoriveille, tässä vaiheessa vain pysty-ja vaakasuorille
         this.voittorivit = new Voittorivi[76];
+        this.vuoro = Pelimerkki.RISTI;
     }
 
     public Pelimerkki[][][] getRuudut() {
         return ruudut;
+    }
+
+    public Pelimerkki getVuoro() {
+        return this.vuoro;
+    }
+
+    /**
+     * Metodi pelivuoron vaihtamiseen.
+     */
+    public void vaihdaVuoro() {
+        this.vuoro = (this.vuoro == Pelimerkki.RISTI) ? Pelimerkki.NOLLA : Pelimerkki.RISTI;
     }
 
     /**
@@ -64,33 +78,23 @@ public class Peli {
     }
 
     private int alustaTasolavistajienSuuntaiset(int laskuri) {
-        Vektori suuntaXY = new Vektori(1, 1, 0);
-        Vektori suuntaMiinusXY = new Vektori(-1, 1, 0);
-
-        Vektori suuntaZY = new Vektori(0, 1, 1);
-        Vektori suuntaMiinusZY = new Vektori(0, 1, -1);
-
-        Vektori suuntaXZ = new Vektori(1, 0, 1);
-        Vektori suuntaMiinusXZ = new Vektori(-1, 0, 1);
-
         for (int x = 1; x <= 4; x++) {
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 1), suuntaZY);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 1), new Vektori(0, 1, 1));
             laskuri++;
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 4), suuntaMiinusZY);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(x, 1, 4), new Vektori(0, 1, -1));
             laskuri++;
         }
-
+        
         for (int z = 1; z <= 4; z++) {
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, z), suuntaXY);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, 1, z), new Vektori(1, 1, 0));
             laskuri++;
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, z), suuntaMiinusXY);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, 1, z), new Vektori(-1, 1, 0));
             laskuri++;
         }
-
         for (int y = 1; y <= 4; y++) {
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, y, 1), suuntaXZ);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(1, y, 1), new Vektori(1, 0, 1));
             laskuri++;
-            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, y, 1), suuntaMiinusXZ);
+            this.voittorivit[laskuri] = new Voittorivi(new Vektori(4, y, 1), new Vektori(-1, 0, 1));
             laskuri++;
         }
         return laskuri++;
@@ -111,16 +115,16 @@ public class Peli {
     }
 
     /**
-     * Metodi yrittää täyttää parametreissa pyydettävän ruudun.
+     * Metodi yrittää täyttää parametreissa pyydettävän ruudun vuorossa olevan
+     * pelaajan merkillä.
      *
      * @param x täytettävän ruudun x-koordinaatti
      * @param y täytettävän ruudun y-koordinaatti
      * @param z täytettävän ruudun z-koordinaatti
-     * @param merkki ruudun täyttävän pelaajan merkki
      *
-     * @return onnistuiko ruudun täyttäminen
+     * @return onnistuiko ruudun tÃ¤yttÃ¤minen
      */
-    public boolean taytaRuutu(int x, int y, int z, Pelimerkki merkki) {
+    public boolean taytaRuutu(int x, int y, int z) {
         if (x < 0 || x > 4 || y < 0 || y > 4 || z < 0 || z > 4) {
             System.out.println("Yritettiin täyttää ruutu, jota ei ole");
             return false;
@@ -131,8 +135,8 @@ public class Peli {
             return false;
         }
 
-        ruudut[x][y][z] = merkki;
-        kirjaaMerkkiVoittoriveihin(x, y, z, merkki);
+        ruudut[x][y][z] = this.vuoro;
+        kirjaaMerkkiVoittoriveihin(x, y, z);
         return true;
     }
 
@@ -142,12 +146,11 @@ public class Peli {
      * @param x kirjattavan ruudun x-koordinaatti
      * @param y kirjattavan ruudun y-koordinaatti
      * @param z kirjattavan ruudun z-koordinaatti
-     * @param merkki ilmaisee ruudun täyttävän pelaajan
      */
-    public void kirjaaMerkkiVoittoriveihin(int x, int y, int z, Pelimerkki merkki) {
+    public void kirjaaMerkkiVoittoriveihin(int x, int y, int z) {
         for (Voittorivi rivi : this.voittorivit) {
             if (rivi.sisaltaa(new Vektori(x, y, z))) {
-                if (merkki == Pelimerkki.NOLLA) {
+                if (this.vuoro == Pelimerkki.NOLLA) {
                     rivi.setNollia(rivi.getNollia() + 1);
                 } else {
                     rivi.setRisteja(rivi.getRisteja() + 1);
@@ -163,11 +166,9 @@ public class Peli {
      */
     public Pelimerkki pelinVoittaja() {
         for (Voittorivi rivi : this.voittorivit) {
-
             if (rivi.getNollia() == 4) {
                 return Pelimerkki.NOLLA;
-            }
-            if (rivi.getRisteja() == 4) {
+            } else if (rivi.getRisteja() == 4) {
                 return Pelimerkki.RISTI;
             }
         }

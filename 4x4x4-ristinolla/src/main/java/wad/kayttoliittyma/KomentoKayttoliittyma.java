@@ -51,14 +51,13 @@ public class KomentoKayttoliittyma {
         this.peli = new Peli();
 
         peli.alustaVoittorivit();
-
+        
         String syote = "";
-        Pelimerkki pelaaja = Pelimerkki.RISTI;
 
         while (!syote.equals("lopeta")) {
             System.out.println("\n Pelitilanne \n");
             System.out.println(peli.toString());
-            System.out.println("Nyt on pelaajan " + pelaaja + " vuoro.");
+            System.out.println("Nyt on pelaajan " + peli.getVuoro() + " vuoro.");
             System.out.println("Syote lopeta lopettaa pelin.");
             int xKordinaatti = lueKoordinaatti("Anna x-koordinaatti: ");
             if (xKordinaatti < 0) {
@@ -76,9 +75,9 @@ public class KomentoKayttoliittyma {
                 syote = "lopeta";
                 continue;
             }
-            boolean vaihdetaanko = peli.taytaRuutu(xKordinaatti, yKordinaatti, zKordinaatti, pelaaja);
+            boolean vaihdetaanko = peli.taytaRuutu(xKordinaatti, yKordinaatti, zKordinaatti);
             if (vaihdetaanko) {
-                pelaaja = this.vaihdaVuoro(pelaaja);
+                this.peli.vaihdaVuoro();
             }
 
             if (peli.pelinVoittaja() != null) {
@@ -113,13 +112,6 @@ public class KomentoKayttoliittyma {
         }
 
         return koordinaatti;
-    }
-
-    private Pelimerkki vaihdaVuoro(Pelimerkki edellinen) {
-        if (edellinen == Pelimerkki.NOLLA) {
-            return Pelimerkki.RISTI;
-        }
-        return Pelimerkki.NOLLA;
     }
     
     public Peli getPeli() {

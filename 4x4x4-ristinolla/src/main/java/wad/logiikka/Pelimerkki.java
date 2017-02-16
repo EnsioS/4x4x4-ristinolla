@@ -1,7 +1,7 @@
 package wad.logiikka;
 
 /**
- *Luokka nimeää pelaajat ja heidän symbolinsa
+ *Luokka nimeää pelaajat ja heidän symbolinsa.
  * 
  * @author Ensio
  */

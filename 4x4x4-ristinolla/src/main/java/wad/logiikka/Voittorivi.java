@@ -12,6 +12,12 @@ public class Voittorivi {
     private int risteja;
     private int nollia;
 
+    /**
+     * Konstruktori voittorivin alustamiseen.
+     * 
+     * @param aloituspaikka mistä voittorivi alkaa 
+     * @param suuntavektori mihin suuntaan siitä jatkuu
+     */
     public Voittorivi(Vektori aloituspaikka, Vektori suuntavektori) {
         this.aloituspaikka = aloituspaikka;
         this.suuntavektori = suuntavektori;

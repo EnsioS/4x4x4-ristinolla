@@ -11,7 +11,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import wad.logiikka.Peli;
+import wad.logiikka.Pelimerkki;
 
 /**
  *
@@ -20,6 +24,7 @@ import javax.swing.WindowConstants;
 public class GraafinenKayttoliittyma implements Runnable {
 
     private JFrame frame;
+    private Peli peli;
 
     @Override
     public void run() {
@@ -28,27 +33,32 @@ public class GraafinenKayttoliittyma implements Runnable {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        this.peli = new Peli();
+        this.peli.alustaVoittorivit();
+
         luoKomponentit(frame.getContentPane());
 
         frame.pack();
         frame.setVisible(true);
+        
     }
 
     private void luoKomponentit(Container container) {
-//        container.add(new Piirtoalusta());
-//        
-//        JButton nappi = new JButton();
-//        nappi.setBackground(Color.WHITE);
-//        container.add(nappi);
-        GridLayout layout = new GridLayout(4, 1);
+        GridLayout layout = new GridLayout(5, 1);
         container.setLayout(layout);
         container.setBackground(Color.WHITE);
 
-        for (int y = 1; y <= 4; y++) {
-            Pelitaso taso = new Pelitaso();
+        JLabel vuoroTeksti = new JLabel("Pelaajan " + this.peli.getVuoro() + " vuoro");
+        vuoroTeksti.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        //epätyypillinen läpikäymisjärjestys tason y = 1 alas saamiseksi
+        for (int y = 4; y >= 1; y--) {
+            Pelitaso taso = new Pelitaso(y, peli, vuoroTeksti);
             container.add(taso);
 
         }
+        
+        container.add(vuoroTeksti);
     }
 
 }

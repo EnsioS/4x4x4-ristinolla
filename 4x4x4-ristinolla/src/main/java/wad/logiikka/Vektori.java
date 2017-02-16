@@ -12,6 +12,14 @@ public class Vektori {
     private int y;
     private int z;
 
+    /**
+     * Konstruktori parametrina annetujen koordinaattien mukaisen vektorin
+     * luomiseksi.
+     *
+     * @param x luotavan vektorin x-koordinaatti
+     * @param y luotavan vektorin y-koordinaatti
+     * @param z luotavan vektorin z-koordinaatti
+     */
     public Vektori(int x, int y, int z) {
         this.x = x;
         this.y = y;

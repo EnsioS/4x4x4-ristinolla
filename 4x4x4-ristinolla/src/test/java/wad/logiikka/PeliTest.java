@@ -64,7 +64,7 @@ public class PeliTest {
 
     @Test
     public void tayttaaTyhjanRuudunOikeinMetodillaTaytaRuutu() {
-        peli.taytaRuutu(3, 1, 3, Pelimerkki.RISTI);
+        peli.taytaRuutu(3, 1, 3);
 
         String oletuspelitilanne = "---- ---- ---- ---- \n";
         oletuspelitilanne += "---- ---- ---- ---- \n";
@@ -77,8 +77,9 @@ public class PeliTest {
 
     @Test
     public void eiTaytaJoTaytettyaRuutuaMetodillaTaytaRuutu() {
-        peli.taytaRuutu(3, 1, 3, Pelimerkki.RISTI);
-        peli.taytaRuutu(3, 1, 3, Pelimerkki.NOLLA);
+        peli.taytaRuutu(3, 1, 3);
+        peli.vaihdaVuoro();
+        peli.taytaRuutu(3, 1, 3);
 
         String oletuspelitilanne = "---- ---- ---- ---- \n";
         oletuspelitilanne += "---- ---- ---- ---- \n";
@@ -90,7 +91,7 @@ public class PeliTest {
 
     @Test
     public void yritysTayttaaOlematonRuutuMetodillaTaytaRuutuEiMuutaPeliTilannetta() {
-        peli.taytaRuutu(0, 0, 7, Pelimerkki.RISTI);
+        peli.taytaRuutu(0, 0, 7);
 
         String oletuspelitilanne = "---- ---- ---- ---- \n";
         oletuspelitilanne += "---- ---- ---- ---- \n";
@@ -106,7 +107,7 @@ public class PeliTest {
         assertFalse("Tässä tilanteessa metodin pelinVoittaja pitäisi palauttaa null", peli.pelinVoittaja() != null);
         
         for (int x = 1; x <= 4; x++) {
-            peli.taytaRuutu(x, 1, 1, Pelimerkki.RISTI);
+            peli.taytaRuutu(x, 1, 1);
         }
                 
         assertEquals("RISTI", peli.pelinVoittaja().toString());
@@ -116,10 +117,11 @@ public class PeliTest {
         
         assertFalse("Tässä tilanteessa metodin pelinVoittaja pitäisi palauttaa null", uusi.pelinVoittaja() != null);
         
+        uusi.vaihdaVuoro();
         for (int x = 1; x <= 4; x++) {
-            uusi.taytaRuutu(x, 1, 1, Pelimerkki.NOLLA);
+            uusi.taytaRuutu(x, 1, 1);
         }
-                
+        
         assertEquals("NOLLA", uusi.pelinVoittaja().toString());
     }
 }
