@@ -11,3 +11,7 @@ voittorivin. Peliin toteutetaan ehkä yksinpelimahdollisuus jonkinlaista tekoäl
 
 ##Luokkakaavio
 ![kuva luokkakaaviosta](luokkakaavio4x4x4-ristinolla.png)
+
+##Sekvenssikaavio
+ - pelimerkillä ruudun täyttäminen
+ ![sekvenssikaavio](SekvenssiKaavio.png)
