@@ -17,7 +17,7 @@ Peli on ohjelman toiminnan tason toteuttava yleisluokka. Se säilöö kolmiulott
 
 Voittori-olio tietää aloitus paikkansa ja suunnan johon siitä jatketaan. Näiden perusteella se osaa kertoa kuuluuko ruutu siihen. Lisäksi voittorivi pitää kirjaa siinä olevien ristien ja nollien määrästä. Vektori-olio tallettaa kolmiulotteisen vektorin koordinaatit ja tarjoaa vektorien summan ja skalaaritulon.
 
-##Sekvenssikaavio
+##Sekvenssikaaviot
  - pelin aloittaminen
  ![sekvenssikaavio](AloitusSekvenssiKaavio.png)
  - pelimerkillä ruudun täyttäminen
