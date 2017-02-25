@@ -29,7 +29,7 @@ public class GraafinenKayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Otsikko");
-        frame.setPreferredSize(new Dimension(350, 500));
+        frame.setPreferredSize(new Dimension(500, 700));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
