@@ -11,3 +11,4 @@ Päivä | Tunnit | Kuvaus
 15.02.2017 | 3h | Jatkoin graafisen käyttöliittymän työstämistä.
 16.02.2017 | 4h | Jatkoin graafisen käyttöliittymän työstämistä ja konfiguroin checkstylen myös javadoceille.
 24.02.2017 | 5.5h | Refaktoroin voittorivien alustamisen, lisäsin rakenteenkuvauksen, käyttöohjeen, toisen sekvenssikaavion ja jar-tiedoston luomisen.
+05.03.2017 | 0.5h | Javadocin generointi ja projektin kunnon lopputarkistus.
